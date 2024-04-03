@@ -1,0 +1,42 @@
+@import "../functions";
+
+$max-width: rem(1440);
+$h-padding-value: 5.75rem;
+$h-padding: calc(50vw - (#{$max-width} / 2 - #{$h-padding-value}));
+
+@mixin h-pad() {
+  padding-inline: 1.25rem;
+
+  @media (--tablet) {
+    padding-inline: 1.875rem;
+  }
+
+  @media (--laptop) {
+    padding-inline: $h-padding-value;
+  }
+
+  @media (--max-width) {
+    padding-inline: $h-padding;
+  }
+}
+
+@mixin h-pad-margin() {
+  padding-inline: 0 !important;
+  margin-right: 1.25rem;
+  margin-left: 1.25rem;
+
+  @media (--tablet) {
+    margin-right: 1.875rem;
+    margin-left: 1.875rem;
+  }
+
+  @media (--laptop) {
+    margin-right: $h-padding-value;
+    margin-left: $h-padding-value;
+  }
+
+  @media (--max-width) {
+    margin-right: $h-padding;
+    margin-left: $h-padding;
+  }
+}
