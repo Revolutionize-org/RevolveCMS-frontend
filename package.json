@@ -9,6 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@apollo/client": "^3.9.10",
+    "@vue/apollo-option": "^4.0.0",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "sass": "^1.72.0",
     "sass-loader": "^14.1.1",
     "vue": "^3.4.21",

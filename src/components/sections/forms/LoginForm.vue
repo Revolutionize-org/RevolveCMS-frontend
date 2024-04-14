@@ -13,7 +13,7 @@
         <FormInput name="username" :model-value="form.fields.username" label="Your username"/>
         <FormInput type="password" name="password" :model-value="form.fields.password" label="Your password"/>
         <div class="form__login">
-          <FormButton label="Sign in"/>
+          <FormButton @click="login" label="Sign in"/>
         </div>
       </form>
     </div>
@@ -24,6 +24,7 @@
 import logo from '@/assets/logo.png'
 import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
+import gql from "graphql-tag";
 
 export default {
   name: "LoginForm",
@@ -37,6 +38,21 @@ export default {
           password: null
         }
       }
+    }
+  },
+  methods: {
+    async login() {
+      const { data } = await this.$apollo.mutate({
+        mutation: gql`
+            mutation Logout {
+  login(userInfo: {email: "admin@proton.me", password:"adminPassword"}) {
+    accessToken
+  }
+}
+          `,
+      });
+
+      console.log(data)
     }
   }
 }
