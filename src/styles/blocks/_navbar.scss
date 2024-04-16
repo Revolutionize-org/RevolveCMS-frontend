@@ -1,0 +1,99 @@
+@import "../mixins", "../settings";
+
+.navbar {
+  @include font-medium();
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: cc(grey);
+
+  &__mobile {
+    background: cc(grey);
+
+    @media (--laptop) {
+      display: none;
+    }
+
+    &-buttons {
+      @include flex();
+      gap: rem(22);
+    }
+
+    &-contact {
+      font-size: rem(25);
+    }
+
+    &-disabled {
+      width: max-content;
+      margin-inline: auto;
+      position: relative;
+      color: cc(grey);
+      cursor: not-allowed;
+    }
+
+    &-home {
+      width: rem(55);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(0.95);
+      }
+    }
+
+    &-link {
+      transition: transform 0.3s ease;
+      transform-origin: center;
+      display: block;
+      color: cc(white);
+
+      &.--logout {
+        color: cc(blue);
+      }
+
+      &:hover {
+        transform: scale(0.95);
+      }
+    }
+
+    &-page {
+      width: 100%;
+      @include font-medium();
+      font-size: rem(35);
+      text-align: center;
+    }
+
+    &-pages {
+      @include flex(center, center, column);
+      width: 100%;
+      gap: 2rem;
+    }
+
+    &-panel {
+      height: calc(100vh - 2rem);
+      padding: 2rem rem(20) rem(140);
+      overflow-y: auto;
+    }
+
+    &-solutions {
+      width: 100%;
+      @include flex(center, center, row);
+      flex-wrap: wrap;
+      gap: rem(10);
+      margin-top: rem(15);
+    }
+
+    &-top {
+      padding: rem(15) rem(25);
+      @include flex(space-between);
+    }
+
+    &-username {
+      @include font-medium();
+      color: cc(white);
+      font-size: rem(20);
+    }
+  }
+}

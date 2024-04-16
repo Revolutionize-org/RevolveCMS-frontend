@@ -1,14 +1,17 @@
 <template>
   <header class="navbar">
-    <DesktopNav/>
+    <DesktopNav v-if="mq.mdPlus"/>
+    <MobileNav v-if="!mq.mdPlus"/>
   </header>
 </template>
 
 <script>
 import DesktopNav from "@/components/navigation/DesktopNav.vue";
+import MobileNav from "@/components/navigation/MobileNav.vue";
 
 export default {
   name: "SiteNav",
-  components: {DesktopNav}
+  inject: ['mq'],
+  components: {MobileNav, DesktopNav}
 }
 </script>

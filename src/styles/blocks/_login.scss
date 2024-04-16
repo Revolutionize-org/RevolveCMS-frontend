@@ -5,12 +5,9 @@
 
   &__container {
     @include flex(flex-start, center, column);
-    width: 80%;
-    height: 78%;
+    width: 100%;
+    height: 100%;
     gap: rem(10);
-    background-color: cc(gray);
-    border-radius: rem(20);
-    box-shadow: 0 0 rem(20) rem(3) cc(blue);
 
     @media(--laptop) {
       flex-direction: row;

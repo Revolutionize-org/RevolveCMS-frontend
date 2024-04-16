@@ -1,0 +1,5 @@
+.content {
+  @include font-medium();
+  color: cc(white);
+  margin-top: rem(55);
+}

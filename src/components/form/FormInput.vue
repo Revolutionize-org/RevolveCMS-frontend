@@ -3,7 +3,7 @@
     <label :for="name" class="form__label">
       <span>{{ label }}</span>
     </label>
-    <input :type="type" :id="name" :name="name" class="form__input" :value="modelValue">
+    <input :type="type" :id="name" :name="name" class="form__input" @input="$emit('update:modelValue', $event.target.value)">
   </div>
 </template>
 
@@ -18,9 +18,6 @@ export default {
     label: {
       type: String,
       required: true
-    },
-    modelValue: {
-      required: true,
     },
     optional: {
       type: Boolean,

@@ -10,10 +10,16 @@
       </div>
       <form class="form">
         <h2 class="form__title">Log into your account</h2>
-        <FormInput name="username" :model-value="form.fields.username" label="Your username"/>
-        <FormInput type="password" name="password" :model-value="form.fields.password" label="Your password"/>
+        <FormInput name="username" v-model="form.fields.username" label="Your email"/>
+        <FormInput type="password" name="password" v-model="form.fields.password" label="Your password"/>
         <div class="form__login">
           <FormButton @click="login" label="Sign in"/>
+          <div>
+            <transition name="fade">
+              <span v-if="form.errorMessage">{{ form.errorMessage }}</span>
+            </transition>
+
+          </div>
         </div>
       </form>
     </div>
@@ -36,23 +42,31 @@ export default {
         fields: {
           username: null,
           password: null
-        }
-      }
+        },
+        errorMessage: null,
+      },
+      storeDispatchMethod: 'loginUser'
     }
   },
   methods: {
-    async login() {
-      const { data } = await this.$apollo.mutate({
-        mutation: gql`
-            mutation Logout {
-  login(userInfo: {email: "admin@proton.me", password:"adminPassword"}) {
-    accessToken
-  }
-}
-          `,
-      });
-
-      console.log(data)
+    login() {
+      this.$store.dispatch(this.storeDispatchMethod, this.form.fields)
+          .then(({error, message}) => {
+            if (!error) {
+              this.$router.push('/dashboard')
+            }else {
+              this.form.errorMessage = message
+            }
+          })
+    }
+  },
+  watch: {
+    'form.errorMessage'(to) {
+      if (to) {
+        setTimeout(() => {
+          this.form.errorMessage = null
+        }, 5000)
+      }
     }
   }
 }
