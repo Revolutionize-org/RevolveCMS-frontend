@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar__mobile">
     <div class="navbar__mobile-top">
-      <h2 class="navbar__mobile-username">User name</h2>
+      <h2 class="navbar__mobile-username">{{ username }}</h2>
       <div class="navbar__mobile-buttons">
         <button :class="['hamburger', {'--opened': isMenuOpen}]" @click="isMenuOpen = !isMenuOpen"
                 :title="isMenuOpen ? 'close' : 'open'">
@@ -23,6 +23,12 @@ import MobileNavPanel from "@/components/navigation/MobileNavPanel.vue";
 export default {
   name: "MobileNav",
   components: {MobileNavPanel, DropDown},
+  props: {
+    username: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       isMenuOpen: false

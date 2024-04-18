@@ -1,7 +1,7 @@
 <template>
   <header class="navbar">
-    <DesktopNav v-if="mq.mdPlus"/>
-    <MobileNav v-if="!mq.mdPlus"/>
+    <DesktopNav :username="username" v-if="mq.mdPlus"/>
+    <MobileNav :username="username" v-if="!mq.mdPlus"/>
   </header>
 </template>
 
@@ -12,6 +12,12 @@ import MobileNav from "@/components/navigation/MobileNav.vue";
 export default {
   name: "SiteNav",
   inject: ['mq'],
-  components: {MobileNav, DesktopNav}
+  components: {MobileNav, DesktopNav},
+  props: {
+    username: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>

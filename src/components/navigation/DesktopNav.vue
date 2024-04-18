@@ -9,7 +9,13 @@ export default {
   name: "DesktopNav",
   data() {
     return {
-      imageSrc : logo
+      imageSrc: logo
+    }
+  },
+  props: {
+    username: {
+      type: String,
+      required: true
     }
   }
 }

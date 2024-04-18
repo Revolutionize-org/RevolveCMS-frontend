@@ -4,7 +4,6 @@
 
 <script>
 import {LoginForm} from "@/components/sections/forms";
-import gql from "graphql-tag";
 
 export default {
   name: "Login",
@@ -14,24 +13,16 @@ export default {
       isLoggedIn: true
     }
   },
-  async beforeCreate() {
-    try {
-      const req = await this.$apollo.mutate({
-        mutation: gql`
-        mutation RefreshToken {
-            refreshToken
-        }
-      `,
-      })
-
-      if (req.data) {
-        localStorage.setItem('accessToken', req.data.refreshToken)
-        this.$router.push('/dashboard')
-      }
-
-    }catch (error) {
-      this.isLoggedIn = false
-    }
+  beforeCreate() {
+    this.$store.dispatch('refreshToken')
+        .then(({error, message}) => {
+          if (!error) {
+            this.$router.push('/dashboard')
+          }
+          else {
+            this.isLoggedIn = false
+          }
+        })
   }
 }
 </script>

@@ -28,5 +28,45 @@ export const API = {
             console.log(error)
             return {error: true, message: 'Incorrect email or password'}
         }
+    },
+
+    async refreshToken() {
+        try {
+            const req = await apolloClient.mutate({
+                mutation: gql`
+            mutation RefreshToken {
+              refreshToken
+            }
+          `
+            });
+
+            if (req.data) {
+                localStorage.setItem('accessToken', req.data.refreshToken)
+                return {error: false, message: null}
+            }
+
+        }catch (error) {
+            return {error: true, message: 'Invalid token'}
+        }
+    },
+    async userName() {
+        try {
+            const req = await apolloClient.query({
+                query: gql`
+            query Me {
+              me {
+                name
+              }
+            }
+          `,
+            });
+
+            if (req.data.me) {
+                return {error: false, message: null, isLogged: true, username: req.data.me.name}
+            }
+
+        }catch (error) {
+            return {error: true, message: error, isLogged: false}
+        }
     }
 }
