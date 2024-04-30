@@ -1,0 +1,32 @@
+.input__text {
+  @include flex(flex-start, flex-start, column);
+  gap: rem(20);
+  padding-bottom: rem(20);
+
+  & h3 {
+    @include font-medium();
+    color: cc(blue);
+    font-size: rem(20);
+  }
+
+  & input {
+    @include font-default();
+    font-size: rem(18);
+    width: 100%;
+    padding: rem(10);
+    border-radius: rem(5);
+    background-color: cc(white);
+    transition: border-bottom-color 0.5s ease;
+    overflow: hidden;
+    color: cc(black);
+
+    &:focus {
+      color: cc(black);
+    }
+  }
+}
+
+.input__error label {
+  color: red;
+  font-size: rem(16);
+}

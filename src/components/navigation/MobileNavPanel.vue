@@ -7,7 +7,7 @@
         </RouterLink>
       </li>
       <li class="navbar__mobile-page">
-        <span class="navbar__mobile-link --logout">
+        <span @click="logout" class="navbar__mobile-link --logout">
           Logout
         </span>
       </li>
@@ -52,7 +52,17 @@ export default {
 	methods: {
 		closeMenu() {
 			this.$emit('closeMenu', false)
-		}
+		},
+    logout() {
+      this.$store.dispatch('logout')
+          .then(({error, message}) => {
+            if (!error) {
+              this.$router.push('/')
+            }else {
+              console.error(message)
+            }
+          })
+    }
 	}
 }
 </script>

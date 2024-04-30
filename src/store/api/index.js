@@ -10,6 +10,15 @@ export const api = {
         },
         userName(context){
             return API.userName()
+        },
+        logout(context){
+            return API.logout()
+        },
+        getHeader(context) {
+            return API.getHeader()
+        },
+        modifyHeader(context, formData) {
+            return API.changeHeader(formData)
         }
     }
 }

@@ -7,10 +7,10 @@
   left: 0;
   width: 100%;
   z-index: 10;
-  background-color: cc(grey);
+  background-color: cc(black);
 
   &__mobile {
-    background: cc(grey);
+    background: cc(black);
 
     @media (--laptop) {
       display: none;
@@ -88,6 +88,11 @@
     &-top {
       padding: rem(15) rem(25);
       @include flex(space-between);
+
+      & img {
+        width: rem(50);
+
+      }
     }
 
     &-username {

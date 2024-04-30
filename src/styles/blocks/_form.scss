@@ -20,7 +20,12 @@
     cursor: pointer;
     text-align: center;
 
-    &:hover {
+    &.--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:not(.--disabled):hover {
       opacity: 0.7;
       transform: scale(0.95);
     }

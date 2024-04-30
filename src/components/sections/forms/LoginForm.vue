@@ -30,7 +30,6 @@
 import logo from '@/assets/logo.png'
 import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
-import gql from "graphql-tag";
 
 export default {
   name: "LoginForm",
