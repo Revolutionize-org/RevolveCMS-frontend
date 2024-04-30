@@ -110,7 +110,6 @@ export const API = {
         }
     },
     async changeHeader(data) {
-        console.log(data)
         try {
             const req = await apolloClient.mutate({
                 mutation: gql`
@@ -134,5 +133,51 @@ export const API = {
         }catch (error) {
             return {error: true, message: error}
         }
-    }
+    },
+    async getFooter() {
+        try {
+            const req = await apolloClient.query({
+                query: gql`
+                query Footer {
+                footer {
+                    id,
+                    name,
+                    data
+                   }
+                  }
+                 `,
+            })
+            if (req.data.footer) {
+                return {error: false, message: null, data: req.data.footer}
+            }
+
+        } catch (error) {
+            return {error: true, message: error}
+        }
+    },
+    async changeFooter(data) {
+        try {
+            const req = await apolloClient.mutate({
+                mutation: gql`
+                mutation modifyFooter($id: String!, $name: String!, $data: String!) {
+                    modifyFooter(footer: {id: $id, name: $name, data: $data}) {
+                        id
+                        }
+                    }
+                `,
+                variables: {
+                    id: data.id,
+                    name: data.name,
+                    data: data.data
+                }
+            })
+
+            if (req.modifyFooter.id) {
+                return {error: false, message: null}
+            }
+
+        }catch (error) {
+            return {error: true, message: error}
+        }
+    },
 }

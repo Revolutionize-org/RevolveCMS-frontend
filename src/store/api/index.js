@@ -19,6 +19,12 @@ export const api = {
         },
         modifyHeader(context, formData) {
             return API.changeHeader(formData)
-        }
+        },
+        getFooter(context) {
+            return API.getFooter()
+        },
+        modifyFooter(context, formData) {
+            return API.changeFooter(formData)
+        },
     }
 }
