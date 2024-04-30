@@ -36,9 +36,8 @@
     }
 
 
-
     & p {
-        font-size: rem(20);
+      font-size: rem(20);
       line-height: rem(30);
     }
   }
@@ -55,14 +54,28 @@
   &__page {
 
     &-title {
-        @include font-medium();
-        font-size: rem(30);
-        padding-bottom: rem(30);
+      @include font-medium();
+      font-size: rem(30);
+      padding-bottom: rem(30);
     }
 
     &-separator {
       margin-bottom: rem(30);
       margin-top: rem(15);
+    }
+  }
+
+
+  &__user {
+    @include flex(space-between, center, row);
+    padding: rem(10);
+
+
+    & li {
+      @include font-medium();
+      font-size: rem(20);
+      list-style: none;
+      color: cc(blue);
     }
   }
 }
