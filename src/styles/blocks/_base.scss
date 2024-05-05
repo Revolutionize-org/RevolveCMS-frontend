@@ -10,6 +10,11 @@
     border-radius: rem(15);
     width: 90%;
 
+    &-hr {
+      margin-top: rem(10);
+      margin-bottom: rem(10);
+    }
+
     & hr {
       width: 100%;
       height: rem(2);
@@ -65,10 +70,52 @@
     }
   }
 
+  &__pages {
+    background-color: #424655;
+
+    &.--card {
+      padding: rem(15);
+      border-radius: rem(10);
+    }
+
+    &-label {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      & li {
+        @include font-medium();
+        font-size: rem(20);
+        list-style: none;
+        color: cc(blue);
+      }
+
+      & :nth-child(1) {
+        text-align: left;
+        align-self: center;
+      }
+
+      & :nth-child(2) {
+        text-align: center;
+        align-self: center;
+      }
+
+      & :nth-child(3) {
+        text-align: right;
+        align-self: center;
+      }
+    }
+
+    &-modify > button {
+      background-color: cc(blue);
+      border-radius: rem(5);
+      padding: rem(5);
+    }
+  }
+
 
   &__user {
     @include flex(space-between, center, row);
-    padding: rem(10);
+    padding-bottom: rem(10);
 
 
     & li {

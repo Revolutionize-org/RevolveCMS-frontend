@@ -180,4 +180,27 @@ export const API = {
             return {error: true, message: error}
         }
     },
+    async getPages() {
+        try {
+            const req = await apolloClient.query({
+                query: gql`
+                query Pages {
+                pages {
+                    id,
+                    name,
+                    slug,
+                    data
+                   }
+                  }
+                 `,
+            })
+
+            if (req.data.pages) {
+                return {error: false, message: null, data: req.data.pages}
+            }
+
+        } catch (error) {
+            return {error: true, message: error}
+        }
+    }
 }

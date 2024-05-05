@@ -26,5 +26,8 @@ export const api = {
         modifyFooter(context, formData) {
             return API.changeFooter(formData)
         },
+        getPages(context) {
+            return API.getPages()
+        }
     }
 }
