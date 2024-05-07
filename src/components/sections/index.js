@@ -3,7 +3,7 @@ import BaseSection from "@/components/sections/BaseSection.vue";
 import FooterSection from "@/components/sections/FooterSection.vue";
 import HeaderSection from "@/components/sections/HeaderSection.vue";
 import PageSection from "@/components/sections/PageSection.vue";
-import UserSection from "@/components/sections/UserSection.vue";
+import SinglePageSection from "@/components/sections/SinglePageSection.vue";
 
 export {
     ContentSection,
@@ -11,5 +11,5 @@ export {
     FooterSection,
     HeaderSection,
     PageSection,
-    UserSection
+    SinglePageSection
 }

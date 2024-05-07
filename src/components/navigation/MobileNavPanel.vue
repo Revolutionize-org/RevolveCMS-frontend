@@ -41,10 +41,6 @@ export default {
         page: {
           name: 'Page',
           link: 'page'
-        },
-        user: {
-          name: 'Users',
-          link: 'user'
         }
       }
     }

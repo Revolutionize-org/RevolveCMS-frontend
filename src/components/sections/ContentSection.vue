@@ -7,7 +7,6 @@
 <script>
 import {HeaderSection, FooterSection} from "@/components/sections";
 import PageSection from "@/components/sections/PageSection.vue";
-import UserSection from "@/components/sections/UserSection.vue";
 import BaseSection from "@/components/sections/BaseSection.vue";
 import SinglePageSection from "@/components/sections/SinglePageSection.vue";
 export default {
@@ -24,8 +23,6 @@ export default {
         case 'page':
           if (this.$route.params.id) return SinglePageSection
           return PageSection
-        case 'user':
-          return UserSection
         default :
             return BaseSection
 
