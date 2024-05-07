@@ -28,6 +28,9 @@ export const api = {
         },
         getPages(context) {
             return API.getPages()
-        }
+        },
+        modifyPage(context, formData) {
+            return API.changePage(formData)
+        },
     }
 }

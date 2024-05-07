@@ -1,3 +1,7 @@
 export const ROUTES = {
-    DASHBOARD: 'dashboard'
+    DASHBOARD: 'dashboard',
+    PAGE: {
+        INDEX: 'pages',
+        SINGLE: 'page'
+    },
 }

@@ -53,6 +53,12 @@
 
     &-button {
       width: 90% !important;
+
+      &.--page {
+        width: 100% !important;
+        margin-top: rem(10);
+        padding: rem(12);
+      }
     }
   }
 
@@ -71,11 +77,17 @@
   }
 
   &__pages {
-    background-color: #424655;
+    background-color: cc(grey, dark);
 
     &.--card {
       padding: rem(15);
       border-radius: rem(10);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        background-color: cc(grey, dark-hover);
+        transform: scale(0.99);
+      }
     }
 
     &-label {

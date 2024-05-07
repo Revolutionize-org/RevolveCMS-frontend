@@ -202,5 +202,31 @@ export const API = {
         } catch (error) {
             return {error: true, message: error}
         }
-    }
+    },
+    async changePage(data) {
+        try {
+            const req = await apolloClient.mutate({
+                mutation: gql`
+                mutation modifyPage($id: String!, $name: String!, $slug: String!, $data: String!) {
+                    modifyPage(page: {id: $id, name: $name, slug: $slug data: $data}) {
+                        id
+                        }
+                    }
+                `,
+                variables: {
+                    id: data.id,
+                    name: data.name,
+                    slug: data.slug,
+                    data: data.data
+                }
+            })
+
+            if (req.modifyPage.id) {
+                return {error: false, message: null}
+            }
+
+        }catch (error) {
+            return {error: true, message: error}
+        }
+    },
 }

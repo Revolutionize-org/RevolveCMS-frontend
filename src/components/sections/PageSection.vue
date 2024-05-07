@@ -7,30 +7,27 @@
       <ul class="base__pages-label">
         <li>Name</li>
         <li>Slug</li>
-        <li>Modify</li>
+        <li>ID</li>
       </ul>
       <hr class="base__container-hr">
-      <ul class="base__pages --card" v-for="page in pages" :key="page.id">
+      <ul class="base__pages --card" v-for="(page, index) in pages" :key="page.id">
+        <RouterLink :to="pageLink(page.id)">
         <li class="base__pages-label">
-          <span>{{ page.name }}</span>
-          <span>{{ page.slug }}</span>
-          <span class="base__pages-modify">
-            <button>
-            <Icon id="arrow"/>
-          </button>
-          </span>
+            <span>{{ page.name }}</span>
+            <span>{{ page.slug }}</span>
+            <span>{{ index+1 }}</span>
         </li>
+        </RouterLink>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import Icon from "@/components/global/Icon.vue";
+import {ROUTES} from "@/helpers/index.js";
 
 export default {
   name: "PageSection",
-  components: {Icon},
   data() {
     return {
       pages: []
@@ -49,6 +46,9 @@ export default {
             }
           })
     },
+    pageLink(index) {
+      return {name: ROUTES.DASHBOARD, params: {type: 'page', id: index}}
+    }
   }
 }
 </script>
