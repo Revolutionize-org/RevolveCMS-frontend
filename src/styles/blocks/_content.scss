@@ -4,4 +4,9 @@
   margin-top: rem(100);
   background-color: cc(black);
   height: 100%;
+
+  @media(--laptop) {
+    margin-top: rem(0);
+    width: 100%;
+  }
 }

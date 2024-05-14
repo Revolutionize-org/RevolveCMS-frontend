@@ -1,0 +1,14 @@
+.dashboard {
+  @media(--laptop) {
+    @include flex(flex-start, flex-start, row);
+    width: 100vw;
+    height: 100vh;
+    gap: rem(40);
+
+    &__content {
+      @include flex(center, center, column);
+      width: 80%;
+    }
+  }
+
+}

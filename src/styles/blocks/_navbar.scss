@@ -9,6 +9,13 @@
   z-index: 10;
   background-color: cc(black);
 
+  @media(--laptop) {
+    @include flex(center, center, row);
+    padding-top: rem(20);
+    padding-bottom: rem(20);
+    position: relative;
+  }
+
   &__mobile {
     background: cc(black);
 
@@ -99,6 +106,34 @@
       @include font-medium();
       color: cc(white);
       font-size: rem(20);
+    }
+  }
+
+  &__desktop {
+    display: none;
+    background-color: cc(grey);
+    width: 90%;
+    padding: rem(20);
+    border-radius: rem(15);
+
+    @media (--laptop) {
+      @include flex(space-between, center, row);
+    }
+
+    &-logo {
+      width: rem(80);
+    }
+
+    &-user {
+      @include font-medium();
+      color: cc(white);
+        font-size: rem(20);
+    }
+
+    &-time {
+      @include font-medium();
+      font-size: rem(20);
+      color: cc(white);
     }
   }
 }
