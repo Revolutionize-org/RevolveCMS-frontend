@@ -19,15 +19,18 @@
         </li>
         </RouterLink>
       </ul>
+      <FormButton @click="addPage" class="base__form-button --page --add" label="Add Page"/>
     </div>
   </div>
 </template>
 
 <script>
 import {ROUTES} from "@/helpers/index.js";
+import FormButton from "@/components/form/FormButton.vue";
 
 export default {
   name: "PageSection",
+  components: {FormButton},
   data() {
     return {
       pages: []
@@ -42,12 +45,29 @@ export default {
           .then(({error, message, data}) => {
             if (!error) {
               this.pages = data;
-              console.log(this.pages)
             }
           })
     },
     pageLink(index) {
       return {name: ROUTES.DASHBOARD, params: {type: 'page', id: index}}
+    },
+    addPage() {
+      const data = {
+        name: 'New ' + (this.pages.length + 1),
+        slug: 'new-' + (this.pages.length + 1),
+        data: JSON.stringify({
+          blocks: []
+        })
+      }
+
+      this.$store.dispatch('addPage', data)
+          .then(({error, id, message}) => {
+            if (!error) {
+              setTimeout(() => {
+                this.$router.push(`/dashboard/page/${id}`)
+              }, 1000)
+            }
+          })
     }
   }
 }

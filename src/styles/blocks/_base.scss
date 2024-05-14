@@ -59,6 +59,11 @@
         margin-top: rem(10);
         padding: rem(12);
       }
+
+      &.--add {
+        font-size: rem(16);
+        padding: rem(10);
+      }
     }
   }
 
@@ -83,6 +88,7 @@
       padding: rem(15);
       border-radius: rem(10);
       transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-bottom: rem(10);
 
       &:hover {
         background-color: cc(grey, dark-hover);

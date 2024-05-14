@@ -16,7 +16,7 @@
         <h2 class="base__page-title">Block Title</h2>
         <TextInput title="Title" v-model="data.content.blocks[index].title"/>
         <h2 class="base__page-title">Block Content</h2>
-        <TextInput title="Content" v-model="data.content.blocks[index].content"/>
+        <TextAreaInput title="Content" v-model="data.content.blocks[index].content"/>
         <h2 class="base__page-title">Block Button</h2>
         <TextInput title="Redirect (optional)" v-model="data.content.blocks[index].button"/>
         <hr v-if="index !== data.content.blocks.length - 1" class="base__page-separator">
@@ -29,10 +29,11 @@
 <script>
 import TextInput from "@/components/input/TextInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
+import TextAreaInput from "@/components/input/TextAreaInput.vue";
 
 export default {
   name: "SinglePageSection",
-  components: {FormButton, TextInput},
+  components: {TextAreaInput, FormButton, TextInput},
   data() {
     return {
       page: null,
@@ -44,8 +45,9 @@ export default {
       has_errors: true,
     }
   },
-  mounted() {
+  created() {
     this.getPagesData().then(() => {
+      console.log('page', this.page);
       this.data.content = JSON.parse(this.page.data)
     })
   },
@@ -58,7 +60,9 @@ export default {
       return this.$store.dispatch('getPages')
           .then(({error, message, data}) => {
             if (!error) {
+              console.log('router', this.$route.params.id)
               this.page = data.find(page => page.id === this.$route.params.id)
+              console.log('pagefound', this.page)
               this.data.name = this.page.name
               this.data.slug = this.page.slug
             }

@@ -32,5 +32,8 @@ export const api = {
         modifyPage(context, formData) {
             return API.changePage(formData)
         },
+        addPage(context, formData) {
+            return API.addPage(formData)
+        }
     }
 }

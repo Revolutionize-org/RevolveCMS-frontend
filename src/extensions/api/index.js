@@ -195,6 +195,7 @@ export const API = {
                  `,
             })
 
+            console.log('pages', req.data.pages)
             if (req.data.pages) {
                 return {error: false, message: null, data: req.data.pages}
             }
@@ -223,6 +224,34 @@ export const API = {
 
             if (req.modifyPage.id) {
                 return {error: false, message: null}
+            }
+
+        }catch (error) {
+            return {error: true, message: error}
+        }
+    },
+    async addPage(data) {
+        try {
+            console.log('data', data);
+
+            const req = await apolloClient.mutate({
+                mutation: gql`
+                mutation createPage($name: String!, $slug: String!, $data: String!) {
+                    createPage(page: {name: $name, slug: $slug data: $data}) {
+                        id
+                        }
+                    }
+                `,
+                variables: {
+                    name: data.name,
+                    slug: data.slug,
+                    data: data.data
+                }
+            })
+
+            console.log('datareq', req.data);
+            if (req.data.createPage.id) {
+                return {error: false, message: null, id: req.data.createPage.id}
             }
 
         }catch (error) {

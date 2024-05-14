@@ -29,7 +29,7 @@ const authLink = setContext((_, { headers }) => {
     };
 });
 
-const tokenRequiredOperations = ['Me', 'Header', 'modifyHeader', 'Footer', 'modifyFooter', 'Pages', 'modifyPage'];
+const tokenRequiredOperations = ['Me', 'Header', 'modifyHeader', 'Footer', 'modifyFooter', 'Pages', 'modifyPage', 'createPage'];
 
 const splitLink = ApolloLink.split(
     ({ operationName }) => requiresToken(operationName, tokenRequiredOperations),
@@ -37,9 +37,21 @@ const splitLink = ApolloLink.split(
     httpLink
 );
 
+const defaultOptions  = {
+    watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+    },
+    query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+    },
+}
+
 const apolloClient = new ApolloClient({
     link: splitLink,
     cache: new InMemoryCache(),
+    defaultOptions: defaultOptions
 })
 
 const apolloProvider = createApolloProvider({
