@@ -47,7 +47,6 @@ export default {
   },
   created() {
     this.getPagesData().then(() => {
-      console.log('page', this.page);
       this.data.content = JSON.parse(this.page.data)
     })
   },
@@ -60,9 +59,7 @@ export default {
       return this.$store.dispatch('getPages')
           .then(({error, message, data}) => {
             if (!error) {
-              console.log('router', this.$route.params.id)
               this.page = data.find(page => page.id === this.$route.params.id)
-              console.log('pagefound', this.page)
               this.data.name = this.page.name
               this.data.slug = this.page.slug
             }
