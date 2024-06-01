@@ -34,6 +34,9 @@ export const api = {
         },
         addPage(context, formData) {
             return API.addPage(formData)
-        }
+        },
+        deletePage(context, formData) {
+            return API.deletePage(formData)
+        },
     }
 }

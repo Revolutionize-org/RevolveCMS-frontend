@@ -4,38 +4,45 @@
       <h2>{{ page.name + " Page" }}</h2>
     </div>
     <div class="base__container">
-      <h2 class="base__page-title">Page Name</h2>
-      <TextInput title="Name" v-model="data.name"/>
-      <h2 class="base__page-title">Page Slug</h2>
-      <TextInput title="Slug" v-model="data.slug"/>
+      <TextInput title="Page Name" v-model="data.name"/>
+      <TextInput title="Page Slug" v-model="data.slug"/>
     </div>
     <form class="base__container">
       <div v-for="(block, index) in data.content.blocks" :key="index">
-        <h2 class="base__page-title">Block Image</h2>
+        <div class="base__container-block">
+          <h2>Block {{ index + 1 }}</h2>
+          <button @click="removeBlock(index)" class="form__button --delete">Delete Block</button>
+        </div>
         <TextInput title="Image (URL)" v-model="data.content.blocks[index].image"/>
-        <h2 class="base__page-title">Block Title</h2>
         <TextInput title="Title" v-model="data.content.blocks[index].title"/>
-        <h2 class="base__page-title">Block Content</h2>
         <TextAreaInput title="Content" v-model="data.content.blocks[index].content"/>
-        <h2 class="base__page-title">Block Button</h2>
-        <TextInput title="Redirect (optional)" v-model="data.content.blocks[index].button"/>
+        <TextInput title="Button Name (optional)" v-model="data.content.blocks[index].button"/>
+        <TextInput title="Button Redirect (optional)" v-model="data.content.blocks[index].redirect"/>
+        <SelectInput title="Alignment" :options="alignmentOptions" v-model="data.content.blocks[index].align"/>
         <hr v-if="index !== data.content.blocks.length - 1" class="base__page-separator">
       </div>
       <FormButton @click="addBlock" class="base__form-button --page" label="Add Block"/>
     </form>
     <FormButton :disabled="has_errors" @click="savePageData" class="base__form-button" label="Save Page"/>
+    <FormButton @click="showDeleteModal" class="base__form-button --red" label="Delete Page"/>
+
+    <ConfirmModal :visible="showModal" @confirm="deletePage" @cancel="hideDeleteModal"/>
   </div>
 </template>
 <script>
 import TextInput from "@/components/input/TextInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
 import TextAreaInput from "@/components/input/TextAreaInput.vue";
+import SelectInput from "@/components/input/SelectInput.vue";
+import ConfirmModal from "@/components/modals/ConfirmModal.vue";
+import {bodyHelpers} from "@/helpers/index.js";
 
 export default {
   name: "SinglePageSection",
-  components: {TextAreaInput, FormButton, TextInput},
+  components: {ConfirmModal, SelectInput, TextAreaInput, FormButton, TextInput},
   data() {
     return {
+      alignmentOptions: ['Left', 'Center', 'Right'],
       page: null,
       data: {
         content: [],
@@ -43,6 +50,7 @@ export default {
         slug: null
       },
       has_errors: true,
+      showModal: false
     }
   },
   created() {
@@ -51,10 +59,29 @@ export default {
     })
   },
   methods: {
-    checkErrors() {
-      if (this.data.name === null || this.data.slug === null) return true
-      return JSON.stringify(JSON.parse(this.page.data)) === JSON.stringify(this.data.content) && this.data.name === this.page.name && this.data.slug === this.page.slug
+    showDeleteModal() {
+      this.showModal = true;
     },
+    hideDeleteModal() {
+      this.showModal = false;
+    },
+    checkErrors() {
+      // Check if the page name or slug is null
+      if (this.data.name === null || this.data.slug === null) return true;
+
+      // Check if any block content is null
+      for (let block of this.data.content.blocks) {
+        if (block.image === null || block.title === null || block.content === null) {
+          return true;
+        }
+      }
+
+      // Check if the data is unchanged
+      return JSON.stringify(JSON.parse(this.page.data)) === JSON.stringify(this.data.content) &&
+          this.data.name === this.page.name &&
+          this.data.slug === this.page.slug;
+    },
+
     getPagesData() {
       return this.$store.dispatch('getPages')
           .then(({error, message, data}) => {
@@ -70,8 +97,21 @@ export default {
         image: null,
         title: null,
         content: null,
-        button: null
+        button: null,
+        redirect: null,
+        align: 'left'
       })
+    },
+    removeBlock(index) {
+      this.data.content.blocks.splice(index, 1);
+    },
+    deletePage() {
+      this.$store.dispatch('deletePage', this.page.id)
+          .then(({error, message}) => {
+            if (!error) {
+              this.$router.push('/dashboard/page')
+            }
+          })
     },
     savePageData() {
       if (this.has_errors) return;
@@ -99,6 +139,9 @@ export default {
           this.has_errors = this.checkErrors();
         }, 100)
       }
+    },
+    'showModal'() {
+      this.showModal ? bodyHelpers.lock() : bodyHelpers.unlock()
     }
   }
 }

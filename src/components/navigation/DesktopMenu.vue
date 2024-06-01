@@ -14,7 +14,7 @@
           </RouterLink>
         </ul>
       </div>
-        <span @click="logout">
+        <span style="cursor: pointer" @click="logout">
           Logout
         </span>
     </div>

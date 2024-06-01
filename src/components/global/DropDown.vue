@@ -5,7 +5,6 @@
     </Component>
   </Component>
 </template>
-
 <script>
 export default {
   name: 'DropDown',

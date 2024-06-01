@@ -20,6 +20,17 @@
     cursor: pointer;
     text-align: center;
 
+    &.--delete {
+      background-color: red;
+      width: auto;
+      padding: rem(15);
+      font-size: rem(18);
+    }
+
+    &.--red {
+      background-color: red;
+    }
+
     &.--disabled {
       opacity: 0.5;
       cursor: not-allowed;

@@ -18,7 +18,6 @@
             <transition name="fade">
               <span v-if="form.errorMessage">{{ form.errorMessage }}</span>
             </transition>
-
           </div>
         </div>
       </form>

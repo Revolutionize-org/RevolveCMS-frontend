@@ -1,7 +1,8 @@
 .input__text {
   @include flex(flex-start, flex-start, column);
   gap: rem(20);
-  padding-bottom: rem(20);
+  padding-bottom: rem(25);
+  padding-top: rem(20);
 
   & h3 {
     @include font-medium();
@@ -23,6 +24,10 @@
     &:focus {
       color: cc(black);
     }
+  }
+
+  &-select {
+    padding-right: rem(25);
   }
 }
 

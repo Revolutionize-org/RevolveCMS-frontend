@@ -9,3 +9,9 @@ main {
 html {
   background-color: cc(black);
 }
+
+body {
+  &.--lock {
+    overflow-y: hidden;
+  }
+}

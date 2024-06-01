@@ -29,7 +29,7 @@ const authLink = setContext((_, { headers }) => {
     };
 });
 
-const tokenRequiredOperations = ['Me', 'Header', 'modifyHeader', 'Footer', 'modifyFooter', 'Pages', 'modifyPage', 'createPage'];
+const tokenRequiredOperations = ['Me', 'Header', 'modifyHeader', 'Footer', 'modifyFooter', 'Pages', 'modifyPage', 'createPage', 'deletePage'];
 
 const splitLink = ApolloLink.split(
     ({ operationName }) => requiresToken(operationName, tokenRequiredOperations),

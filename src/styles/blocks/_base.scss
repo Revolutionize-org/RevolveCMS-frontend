@@ -10,6 +10,10 @@
     border-radius: rem(15);
     width: 90%;
 
+    &-block {
+        @include flex(space-between, center, row);
+    }
+
     &-hr {
       margin-top: rem(10);
       margin-bottom: rem(10);

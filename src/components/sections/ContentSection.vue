@@ -1,7 +1,9 @@
 <template>
-  <div class="content">
-    <component :is="componentInstance"/>
-  </div>
+    <div class="content">
+      <transition name="fade" mode="out-in">
+        <component :is="componentInstance" :key="$route.params.type + $route.params.id"/>
+      </transition>
+    </div>
 </template>
 
 <script>

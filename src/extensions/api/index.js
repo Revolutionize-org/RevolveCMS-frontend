@@ -253,4 +253,25 @@ export const API = {
             return {error: true, message: error}
         }
     },
+    async deletePage(data) {
+        try {
+            const req = await apolloClient.mutate({
+                mutation: gql`
+                mutation deletePage($id: String!) {
+                    deletePage(id: $id)
+                }
+                `,
+                variables: {
+                    id: data
+                }
+            })
+
+            if (req.data.deletePage) {
+                return {error: false, message: null}
+            }
+
+        }catch (error) {
+            return {error: true, message: error}
+        }
+    }
 }

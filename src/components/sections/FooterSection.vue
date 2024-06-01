@@ -51,6 +51,10 @@ export default {
             {
               title: null,
               link: null
+            },
+            {
+              title: null,
+              link: null
             }
           ],
           credits: null
