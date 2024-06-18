@@ -96,7 +96,6 @@ export default {
       this.$store.dispatch('modifyHeader', data)
           .then(({error, message}) => {
             if (!error) {
-             console.log('Header saved')
             }
           })
     }

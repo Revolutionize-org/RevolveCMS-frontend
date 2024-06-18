@@ -90,7 +90,6 @@ export default {
       this.$store.dispatch('modifyFooter', data)
           .then(({error, message}) => {
             if (!error) {
-              console.log('Footer saved')
             }
           })
     }

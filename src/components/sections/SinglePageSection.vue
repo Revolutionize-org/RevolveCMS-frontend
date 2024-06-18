@@ -109,6 +109,7 @@ export default {
       this.$store.dispatch('deletePage', this.page.id)
           .then(({error, message}) => {
             if (!error) {
+              bodyHelpers.unlock()
               this.$router.push('/dashboard/page')
             }
           })
@@ -126,7 +127,6 @@ export default {
       this.$store.dispatch('modifyPage', data)
           .then(({error, message}) => {
             if (!error) {
-              console.log('Page saved')
             }
           })
     }
