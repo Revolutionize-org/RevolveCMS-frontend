@@ -10,7 +10,7 @@ import {Vue3Mq} from 'vue3-mq'
 import mitt from "mitt";
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3000/graphql',
+    uri: import.meta.env.VITE_APP_API_URL,
     credentials: 'include'
 });
 
