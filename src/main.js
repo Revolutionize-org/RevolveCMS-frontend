@@ -11,7 +11,10 @@ import mitt from "mitt";
 
 const httpLink = createHttpLink({
     uri: import.meta.env.VITE_APP_API_URL,
-    credentials: 'include'
+    credentials: 'include',
+    fetchOptions: {
+        mode: 'cors'
+    }
 });
 
 const requiresToken = (operationName, tokenRequiredOperations) => {
